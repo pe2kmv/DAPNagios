@@ -11,7 +11,7 @@ Although this script has been written for the sake of Nagios it can be used for 
 
 ## Dependencies
 - Python 3.x
-- modules configparser, argparse
+- modules configparser, argparse, logging, requests, json, sys
 
 ## Installation
 Clone the repository to your local disk
