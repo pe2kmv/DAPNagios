@@ -9,6 +9,14 @@ The main reason for this script is the fact I've noticed there wasn't any decent
 
 Although this script has been written for the sake of Nagios it can be used for any CLI application in conjunction with DAPNET.
 
+## Word of caution!
+Sending automated messages via the CLI should be well evaluated as it can cause a flood of unwanted data if a process gets out of control. If you are automating transmission of DAPNET messages please:
+- always choose the smallest possible TX group (it doesn't make sense to send messages for a local public via all transmitters on all continents);
+- have a safety catch: 
+  - transmissing should be hold back in case any error in your script has occurred;
+  - limit the number of sent messages over time;
+  - don't loop based on the answer of the API (if sending fails something is wrong in your settings, so don't loop).
+
 ## Dependencies
 - Python 3.x
 - modules configparser, argparse, logging, requests, json, sys
