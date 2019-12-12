@@ -59,8 +59,18 @@ Run the script with these attributes:
 - -r --recepient [call sign]
 - -t --txgroup [tx group as defined by DAPNET]
 - -m --message "message to send, enclosed by quotes"
- 
+
+Messages can be sent to multiple recepients by comma separating the call signs and putting everything between quotes.
+Transmission via multiple TX groups is possible by comma separating the TX groups and putting everything between quotes.
+
+Examples:
 ```
 python3 DAPNagios.py -r pa0abc -t pa-all -m "Testmessage via DAPNET"
+
+python3 DAPNagios.py -r "pa0abc,pb1def" -t pa-all -m "Testmessage via DAPNET"
+
+python3 DAPNagios.py -r pa0abc -t "pa-all,dl-nw" -m "Testmessage via DAPNET"
+
+python3 DAPNagios.py -r "pa0abc,pb1def" -t "pa-all,dl_bw" -m "Testmessage via DAPNET"
 ```
 
