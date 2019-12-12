@@ -22,7 +22,7 @@ args = parser.parse_args()
 # end setup variables
 
 # read configuration
-config.read('/usr/local/etc/DAPNagios.cfg')
+config.read('/home/pi/pythonprojects/DAPNagios/DAPNagios.cfg')
 dapUser = config['DAPNET.USER']['dapnet_username']
 dapPW = config['DAPNET.USER']['dapnet_password']
 dapURI = config['DAPNET-SERVER']['dapnet_base_uri']
@@ -73,6 +73,8 @@ if isinstance(args.emergency,bool) == False:
 
 # function to send actual pager message
 def send_page(msg_sub,func,trx,emr,msgtxt):
+	msg_sub = msg_sub.replace(" ","").replace(","," ").split()
+	trx = trx.replace(" ","").replace(","," ").split()
 	logging.debug('URI - '+ str(full_uri))
 	logging.debug('Username - ' + str(dapUser))
 	logging.debug(dapPW)
@@ -81,7 +83,7 @@ def send_page(msg_sub,func,trx,emr,msgtxt):
 	logging.debug('TX group - ' + str(trx))
 	logging.debug('Emergency - ' + str(emr))
 	logging.debug('Message - ' + str(msgtxt))
-	req = requests.post(full_uri,auth=(dapUser,dapPW),json={'text':msgtxt,'callSignNames':[msg_sub],'transmitterGroupNames':[trx],'emergency':emr})
+	req = requests.post(full_uri,auth=(dapUser,dapPW),json={'text':msgtxt,'callSignNames':msg_sub,'transmitterGroupNames':trx,'emergency':emr})
 	if req.status_code == 201:
 		logging.info(req)
 	else:
